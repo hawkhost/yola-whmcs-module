@@ -8,7 +8,7 @@ function toplineyola_ConfigOptions()
 {
     // WHMCS has a maximum of 24 options
     $configarray = array(
-        "Bundle Name" => array("Type" => "text", "Size" => "25",),
+        "Topline Yola Bundle ID" => array("Type" => "text", "Size" => "25",),
         "Trial" => array("Type" => "yesno", "Description" => "Tick to be trial account"),
         "Trial Duration" => array("Type" => "text", "Description" => "Duration 1-30 Days"),
         "Trial FTP Address" => array("Type" => "text", "Size" => "25",),

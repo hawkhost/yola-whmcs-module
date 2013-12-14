@@ -98,12 +98,20 @@ function toplineyola_CreateAccount($params)
         }
     } else {
         $options['status'] = 1;
-        /*
-         * Logic for setting up a sitebuilder on a hosting account
-         */
+        // find services order id which is not stored in params
+        $serviceQuery = select_query("tblhosting", "orderid","id='".$params['serviceid']."'");
+        $order = mysql_fetch_array($serviceQuery);
+        // Look for a service on the order id
         $join = "tblproducts ON tblhosting.packageid=tblproducts.id";
-        $result = select_query("tblhosting", "tblhosting.*", array("userid" => $params['clientsdetails']['id'], "type" => "hostingaccount", "domainstatus" => "Active"), "id", "ASC", "1", $join);
+        $result = select_query("tblhosting", "tblhosting.*", array("orderid" => $order['orderid'], "type" => "hostingaccount", "domainstatus" => "Active"), "id", "DESC", "1", $join);
         $service = mysql_fetch_array($result);
+        //  If no active service is found fall back on searching for most recent active hosting service
+        if (isset($service['id'])) {
+            $join = "tblproducts ON tblhosting.packageid=tblproducts.id";
+            $result = select_query("tblhosting", "tblhosting.*", array("userid" => $params['clientsdetails']['id'], "type" => "hostingaccount", "domainstatus" => "Active"), "id", "DESC", "1", $join);
+            $service = mysql_fetch_array($result);
+        }
+        // Found service in one of the scenarios set that as the settings
         if (isset($service['id'])) {
             $options['ftp_address'] = 'ftp.' . $service['domain'];
             $options['ftp_userid'] = $service['username'];

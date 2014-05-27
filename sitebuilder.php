@@ -72,6 +72,7 @@ function saveCustomSettings($ca)
                 'ftp_mode' => $_POST['ftp_mode'],
                 'ftp_protocol' => $_POST['ftp_protocol'],
                 'ftp_username' => $_POST['ftp_username'],
+                'ftp_port' => $_POST['ftp_port'],
                 'domain' => $_POST['domain'],
             );
             $where = array("serviceid" => $_POST['service_id'],);

@@ -187,7 +187,7 @@ function syncwithDbTable($serviceId)
  */
 function setHostingAccount($ca)
 {
-    if (checkServiceAccess($_POST['service_id'], $ca->getUserID() && !isTrial($_REQUEST['service_id']))) {
+    if (checkServiceAccess($_POST['service_id'], $ca->getUserID()) && !isTrial($_REQUEST['service_id'])) {
         // Retrieve current hosting account settings
         $result = select_query("tblhosting", "*", array("id" => $_POST['hostingid'], 'userid' => $ca->getUserID(), 'domainstatus' => 'Active'));
         $hosting = mysql_fetch_array($result);

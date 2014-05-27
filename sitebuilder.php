@@ -199,6 +199,7 @@ function setHostingAccount($ca)
             'ftp_password' => $hosting['password'],
             'ftp_wwwroot' => 'public_html',
             'ftp_mode' => 'Active',
+            'ftp_port' => 21,
             'ftp_userid' => $hosting['username'],
             'ftp_protocol' => 1,
             'domain' => $hosting['domain'],

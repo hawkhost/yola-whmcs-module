@@ -71,6 +71,7 @@ function saveCustomSettings($ca)
                 'ftp_wwwroot' => $_POST['ftp_wwwroot'],
                 'ftp_mode' => $_POST['ftp_mode'],
                 'ftp_protocol' => $_POST['ftp_protocol'],
+                'ftp_username' => $_POST['ftp_username'],
                 'domain' => $_POST['domain'],
             );
             $where = array("serviceid" => $_POST['service_id'],);
@@ -167,7 +168,7 @@ function syncwithDbTable($serviceId)
         'userid' => $sb['serviceid'],
         'ftp_address' => $sb['ftp_address'],
         'ftp_userid' => $sb['ftp_username'],
-        'ftp_password' => $sb['ftp_password'],
+        'ftp_password' => decrypt($sb['ftp_password']),
         'ftp_port' => $sb['ftp_port'],
         'ftp_wwwroot' => $sb['ftp_wwwroot'],
         'ftp_mode' => $sb['ftp_mode'],
@@ -197,6 +198,7 @@ function setHostingAccount($ca)
             'ftp_password' => $hosting['password'],
             'ftp_wwwroot' => 'public_html',
             'ftp_mode' => 'Active',
+            'ftp_userid' => $hosting['username'],
             'ftp_protocol' => 1,
             'domain' => $hosting['domain'],
         );

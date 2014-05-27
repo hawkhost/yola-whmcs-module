@@ -199,12 +199,12 @@ function setHostingAccount($ca)
             'ftp_password' => $hosting['password'],
             'ftp_wwwroot' => 'public_html',
             'ftp_mode' => 'Active',
-            'ftp_port' => 21,
-            'ftp_userid' => $hosting['username'],
+            'ftp_port' => "21",
+            'ftp_username' => $hosting['username'],
             'ftp_protocol' => 1,
             'domain' => $hosting['domain'],
         );
-        $where = array("serviceid" => $_POST['service_id'],);
+        $where = array("serviceid" => $_POST['service_id']);
         update_query($table, $update, $where);
         if (syncwithDbTable($_POST['service_id'])) {
             $saved = array(
